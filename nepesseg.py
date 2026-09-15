@@ -1,6 +1,6 @@
 nepesseg = []
-telepulesek_szama = 0
 adott_megyek = []
+telepulesek_szama = 0
 osszlakosok = 0
 ossz_varos_lakok = 0
 
@@ -21,7 +21,6 @@ with open("lakossag_2025.csv", "r", encoding="UTF-8") as forrasfajl:
         nepesseg.append(n)
 
 while True:
-
     telepules = input(
         "[1] Megye adatai\n"
         "[2] Település típusok\n"
@@ -30,9 +29,7 @@ while True:
     ).lower()
 
     if telepules == "1":
-
         bekert_megye = input("Adjon meg egy megyét (PL: HAJ): ").upper()
-
         for i in nepesseg:
             if i["megye"] == bekert_megye:
                 telepulesek_szama += 1
@@ -49,23 +46,18 @@ while True:
         print(f"{ossz_varos_lakok} ember lakik ebből városokban.")
 
     elif telepules == "2":
-
         tipusok = []
-
         for i in nepesseg:
             if i["tipus"] not in tipusok:
                 tipusok.append(i["tipus"])
 
-
-        print("\n--- Településtípusok ---")
+        print("\nTelepüléstípusok:")
 
         for sorszam, tipus in enumerate(tipusok, 1):
             print(f"[{sorszam}] {tipus}")
 
         valasztas = int(input("\nVálasszon egy településtípust: "))
-
         bekert_tipus = tipusok[valasztas - 1]
-
         kozseg_tipusok = []
 
         for i in nepesseg:
@@ -76,23 +68,17 @@ while True:
         oldal_meret = 10
 
         while True:
-
             kezdet = oldal * oldal_meret
             veg = kezdet + oldal_meret
 
-            print("\n--- Települések ---")
+            print("\nTelepülések:")
 
             for i in kozseg_tipusok[kezdet:veg]:
-
                 lakossag = i["ferfi"] + i["no"]
-
                 print(f'{i["telepules"]} - {lakossag} fő')
 
 
-            print(
-                f"\nOldal: {oldal + 1} / "
-                f"{(len(kozseg_tipusok) + oldal_meret - 1) // oldal_meret}"
-            )
+            print(f"\nOldal: {oldal + 1} / {(len(kozseg_tipusok) + oldal_meret - 1) // oldal_meret}")
 
             print("\n[N] Következő oldal")
             print("[B] Előző oldal")
@@ -102,24 +88,20 @@ while True:
 
 
             if valasztas == "n".lower():
-
                 if veg < len(kozseg_tipusok):
                     oldal += 1
                 else:
                     print("Ez az utolsó oldal!")
 
             elif valasztas == "b".lower():
-
                 if oldal > 0:
                     oldal -= 1
                 else:
                     print("Ez az első oldal!")
 
-
             elif valasztas == "q".lower():
                 break      
 
     elif telepules == "x".lower():
-
-        print("Program vége!")
+        print("A program vége!")
         break              
